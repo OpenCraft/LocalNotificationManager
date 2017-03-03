@@ -1,0 +1,22 @@
+{
+  "name": "LocalNotificationManager",
+  "version": "0.1.0",
+  "summary": "A short description of LocalNotificationManager.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/cristianDRM/LocalNotificationManager",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "cristianDRM": "cristianmadridd@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/cristianDRM/LocalNotificationManager.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "LocalNotificationManager/Classes/**/*"
+}

@@ -1,0 +1,16 @@
+PODS:
+  - LocalNotificationManager (0.1.0)
+
+DEPENDENCIES:
+  - LocalNotificationManager (from `../`)
+
+EXTERNAL SOURCES:
+  LocalNotificationManager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  LocalNotificationManager: c34fdc04a7a98e90b885bca7cd0b6e64cd469b03
+
+PODFILE CHECKSUM: 71c1e9c91dadb40b3bd5bd188f815cf33ae7c27f
+
+COCOAPODS: 1.2.0
