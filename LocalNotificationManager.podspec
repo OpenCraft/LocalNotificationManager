@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 A Lib that remove from your shoulders the responsability to handle with version issues when you just want to send a Local Notification
                        DESC
 
-  s.homepage         = 'https://github.com/cristianDRM/LocalNotificationManager'
+  s.homepage         = 'https://github.com/OpenCraft/LocalNotificationManager'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'cristianDRM' => 'cristianmadridd@gmail.com' }
-  s.source           = { :git => 'https://github.com/cristianDRM/LocalNotificationManager.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/OpenCraft/LocalNotificationManager.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
