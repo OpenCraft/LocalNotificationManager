@@ -1,9 +1,9 @@
 {
   "name": "LocalNotificationManager",
   "version": "0.1.0",
-  "summary": "A short description of LocalNotificationManager.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/cristianDRM/LocalNotificationManager",
+  "summary": "A Lib that turn easy to send a Local Notification",
+  "description": "A Lib that remove from your shoulders the responsability to handle with version issues when you just want to send a Local Notification",
+  "homepage": "https://github.com/OpenCraft/LocalNotificationManager",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "cristianDRM": "cristianmadridd@gmail.com"
   },
   "source": {
-    "git": "https://github.com/cristianDRM/LocalNotificationManager.git",
+    "git": "https://github.com/OpenCraft/LocalNotificationManager.git",
     "tag": "0.1.0"
   },
   "platforms": {
