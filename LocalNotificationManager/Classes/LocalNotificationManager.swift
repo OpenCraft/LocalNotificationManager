@@ -9,7 +9,7 @@
 import UserNotifications
 import UIKit
 
-class LocalNotificationManager {
+public class LocalNotificationManager {
     
     fileprivate var application: UIApplication?
     let scheduler: LocalNotificationScheduler
