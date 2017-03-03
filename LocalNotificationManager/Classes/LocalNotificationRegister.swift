@@ -15,11 +15,17 @@ protocol LocalNotificationRegister {
 }
 
 class LocalNotificationRegisterFactory {
+    
     static func instantiate(application: UIApplication) -> LocalNotificationRegister {
         if #available(iOS 10, *) {
             return LocalNotificationRegisterNewestiOS(application: application)
         }
-        return LocalNotificationRegisterLegacyiOS(application: application)
+        
+        if #available(iOS 9, *) {
+            return LocalNotificationRegisterLegacyiOS(application: application)
+        } else {
+            return LocalNotificationRegisterLegacyiOS(application: application)
+        }
     }
 }
 

@@ -55,7 +55,6 @@ class LocalNotificationSchedulerNewestiOS: LocalNotificationScheduler {
 }
 
 @available(iOS 9, *)
-@available(iOS 8, *)
 class LocalNotificationSchedulerLegacyiOS: LocalNotificationScheduler {
     
     fileprivate var notification: UILocalNotification?
