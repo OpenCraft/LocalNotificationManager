@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'LocalNotificationManager'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of LocalNotificationManager.'
+  s.summary          = 'A Lib that turn easy to send a Local Notification'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A Lib that remove from your shoulders the responsability to handle with version issues when you just want to send a Local Notification
                        DESC
 
   s.homepage         = 'https://github.com/cristianDRM/LocalNotificationManager'
