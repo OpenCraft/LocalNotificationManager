@@ -12,7 +12,16 @@ import UIKit
 public protocol LocalNotificationScheduler {
     init(categoryIdentifier: String)
     func schedule(title: String, message: String, date: Date)
+    func schedule(title: String, message: String)
     func cleanNotifications()
+}
+
+extension LocalNotificationScheduler {
+    public func schedule(title: String, message: String) {
+        let calendar = Calendar.current
+        let date = calendar.date(byAdding: .second, value: 10, to: Date()) ?? Date()
+        schedule(title: title, message: message, date: date)
+    }
 }
 
 public class LocalNotificationSchedulerFactory {
@@ -41,10 +50,10 @@ public class LocalNotificationSchedulerNewestiOS: LocalNotificationScheduler {
         content.sound = UNNotificationSound.default()
         
         let center = UNUserNotificationCenter.current()
-        center.add(getNotificationRequest(content: content, date: date))
+        center.add(generateNotificationRequest(content: content, date: date))
     }
     
-    func getNotificationRequest(content: UNMutableNotificationContent, date: Date) -> UNNotificationRequest {
+    func generateNotificationRequest(content: UNMutableNotificationContent, date: Date) -> UNNotificationRequest {
         var dateComponents = DateComponents()
         dateComponents.hour = date.hour
         dateComponents.minute = date.minute
@@ -54,15 +63,14 @@ public class LocalNotificationSchedulerNewestiOS: LocalNotificationScheduler {
     }
     
     public func cleanNotifications() {
-        let center = UNUserNotificationCenter.current()
-        center.removePendingNotificationRequests(withIdentifiers: [categoryIdentifier])
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [categoryIdentifier])
     }
 }
 
 @available(iOS 9, *)
 public class LocalNotificationSchedulerLegacyiOS: LocalNotificationScheduler {
     
-    fileprivate var notification: UILocalNotification?
+    fileprivate var notifications = [UILocalNotification]()
     
     let categoryIdentifier: String
     
@@ -72,7 +80,7 @@ public class LocalNotificationSchedulerLegacyiOS: LocalNotificationScheduler {
     
     public func schedule(title: String, message: String, date: Date) {
         let localNotification = UILocalNotification()
-        notification = localNotification
+        notifications.append(localNotification)
         
         localNotification.fireDate = date
         localNotification.timeZone = TimeZone.current
@@ -84,7 +92,7 @@ public class LocalNotificationSchedulerLegacyiOS: LocalNotificationScheduler {
     }
     
     public func cleanNotifications() {
-        if let notification = notification {
+        for notification in notifications {
             UIApplication.shared.cancelLocalNotification(notification)
         }
     }
