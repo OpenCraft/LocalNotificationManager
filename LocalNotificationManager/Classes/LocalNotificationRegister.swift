@@ -30,7 +30,7 @@ class LocalNotificationRegisterFactory {
 }
 
 public class LocalNotificationRegisterBase: LocalNotificationRegister {
-    public func register() -> LocalNotificationRegisterFetch {
+    @discardableResult public func register() -> LocalNotificationRegisterFetch {
         fatalError("You must implement this function")
     }
 

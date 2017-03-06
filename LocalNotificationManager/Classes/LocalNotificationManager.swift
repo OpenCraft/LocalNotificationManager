@@ -12,9 +12,9 @@ import UIKit
 public class LocalNotificationManager {
     
     fileprivate var application: UIApplication?
-    let scheduler: LocalNotificationScheduler
-    let registrator: LocalNotificationRegister
-    let categoryIdentifier: String
+    public let scheduler: LocalNotificationScheduler
+    public let registrator: LocalNotificationRegister
+    public let categoryIdentifier: String
     
     public init(application: UIApplication) {
         self.categoryIdentifier = Bundle.main.displayName ?? NSUUID().uuidString
