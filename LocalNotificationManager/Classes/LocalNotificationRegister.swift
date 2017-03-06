@@ -8,7 +8,7 @@
 import UserNotifications
 import UIKit
 
-protocol LocalNotificationRegister {
+public protocol LocalNotificationRegister {
     init(application: UIApplication)
     func register() -> LocalNotificationRegisterFetch
     func application(didRegister notificationSettings: UIUserNotificationSettings)
@@ -29,19 +29,19 @@ class LocalNotificationRegisterFactory {
     }
 }
 
-class LocalNotificationRegisterBase: LocalNotificationRegister {
-    internal func register() -> LocalNotificationRegisterFetch {
+public class LocalNotificationRegisterBase: LocalNotificationRegister {
+    public func register() -> LocalNotificationRegisterFetch {
         fatalError("You must implement this function")
     }
 
     fileprivate var application: UIApplication?
     fileprivate let fetcher = LocalNotificationRegisterFetch()
     
-    required init(application: UIApplication) {
+    required public init(application: UIApplication) {
         self.application = application
     }
     
-    func application(didRegister notificationSettings: UIUserNotificationSettings) {
+    public func application(didRegister notificationSettings: UIUserNotificationSettings) {
         if notificationSettings.types.contains(.alert) {
             self.fetcher.doSuccess()
         } else {
@@ -52,8 +52,8 @@ class LocalNotificationRegisterBase: LocalNotificationRegister {
 
 @available(iOS 9, *)
 @available(iOS 8, *)
-class LocalNotificationRegisterLegacyiOS: LocalNotificationRegisterBase {
-    override func register() -> LocalNotificationRegisterFetch {
+public class LocalNotificationRegisterLegacyiOS: LocalNotificationRegisterBase {
+    override public func register() -> LocalNotificationRegisterFetch {
         UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
         UIApplication.shared.registerForRemoteNotifications()
         return fetcher
@@ -61,8 +61,8 @@ class LocalNotificationRegisterLegacyiOS: LocalNotificationRegisterBase {
 }
 
 @available(iOS 10, *)
-class LocalNotificationRegisterNewestiOS: LocalNotificationRegisterBase {
-    override func register() -> LocalNotificationRegisterFetch {
+public class LocalNotificationRegisterNewestiOS: LocalNotificationRegisterBase {
+    override public func register() -> LocalNotificationRegisterFetch {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.badge, .alert, .sound]) { granted, _ in
             if granted {
@@ -76,7 +76,7 @@ class LocalNotificationRegisterNewestiOS: LocalNotificationRegisterBase {
     }
 }
 
-class LocalNotificationRegisterFetch {
+public class LocalNotificationRegisterFetch {
     
     private var onSuccessClosure: ((Void) -> Void)? = nil
     private var onFailureClosure: ((Void) -> Void)? = nil

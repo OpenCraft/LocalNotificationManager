@@ -9,26 +9,31 @@
 import UserNotifications
 import UIKit
 
-protocol LocalNotificationScheduler {
-    func schedule(message: String, date: Date)
+public protocol LocalNotificationScheduler {
+    init(categoryIdentifier: String)
+    func schedule(title: String, message: String, date: Date)
     func cleanNotifications()
 }
 
-class LocalNotificationSchedulerFactory {
-    static func instantiate() -> LocalNotificationScheduler {
+public class LocalNotificationSchedulerFactory {
+    static func instantiate(categoryIdentifier: String) -> LocalNotificationScheduler {
         if #available(iOS 10, *) {
-            return LocalNotificationSchedulerNewestiOS()
+            return LocalNotificationSchedulerNewestiOS(categoryIdentifier: categoryIdentifier)
         }
-        return LocalNotificationSchedulerLegacyiOS()
+        return LocalNotificationSchedulerLegacyiOS(categoryIdentifier: categoryIdentifier)
     }
 }
 
-private let categoryIdentifier = "Registration"
-private let title = "Unicred"
 @available(iOS 10.0, *)
-class LocalNotificationSchedulerNewestiOS: LocalNotificationScheduler {
+public class LocalNotificationSchedulerNewestiOS: LocalNotificationScheduler {
     
-    func schedule(message: String, date: Date) {
+    let categoryIdentifier: String
+    
+    public required init(categoryIdentifier: String) {
+        self.categoryIdentifier = categoryIdentifier
+    }
+    
+    public func schedule(title: String, message: String, date: Date) {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = message
@@ -48,18 +53,24 @@ class LocalNotificationSchedulerNewestiOS: LocalNotificationScheduler {
         return UNNotificationRequest(identifier: categoryIdentifier, content: content, trigger: trigger)
     }
     
-    func cleanNotifications() {
+    public func cleanNotifications() {
         let center = UNUserNotificationCenter.current()
         center.removePendingNotificationRequests(withIdentifiers: [categoryIdentifier])
     }
 }
 
 @available(iOS 9, *)
-class LocalNotificationSchedulerLegacyiOS: LocalNotificationScheduler {
+public class LocalNotificationSchedulerLegacyiOS: LocalNotificationScheduler {
     
     fileprivate var notification: UILocalNotification?
     
-    func schedule(message: String, date: Date) {
+    let categoryIdentifier: String
+    
+    public required init(categoryIdentifier: String) {
+        self.categoryIdentifier = categoryIdentifier
+    }
+    
+    public func schedule(title: String, message: String, date: Date) {
         let localNotification = UILocalNotification()
         notification = localNotification
         
@@ -72,7 +83,7 @@ class LocalNotificationSchedulerLegacyiOS: LocalNotificationScheduler {
         UIApplication.shared.scheduleLocalNotification(localNotification)
     }
     
-    func cleanNotifications() {
+    public func cleanNotifications() {
         if let notification = notification {
             UIApplication.shared.cancelLocalNotification(notification)
         }

@@ -14,10 +14,19 @@ public class LocalNotificationManager {
     fileprivate var application: UIApplication?
     let scheduler: LocalNotificationScheduler
     let registrator: LocalNotificationRegister
+    let categoryIdentifier: String
     
-    init(application: UIApplication) {
+    public init(application: UIApplication) {
+        self.categoryIdentifier = Bundle.main.displayName ?? NSUUID().uuidString
         self.application = application
-        self.scheduler = LocalNotificationSchedulerFactory.instantiate()
         self.registrator = LocalNotificationRegisterFactory.instantiate(application: application)
+        self.scheduler = LocalNotificationSchedulerFactory.instantiate(categoryIdentifier: categoryIdentifier)
+        
+    }
+}
+
+fileprivate extension Bundle {
+    var displayName: String? {
+        return object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
     }
 }
